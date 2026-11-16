@@ -1,0 +1,9 @@
+Windows Registry Editor Version 5.00
+
+; Windows "Graphics settings" per-app GPU preference: GpuPreference=2 = High performance (the discrete GPU).
+; Double-click this file ONCE to apply it for the game executables below. It only affects these exe paths.
+; To undo: Settings > System > Display > Graphics > pick the app > Options > "Let Windows decide", or delete these values.
+[HKEY_CURRENT_USER\Software\Microsoft\DirectX\UserGpuPreferences]
+"C:\Users\junai\Downloads\fifa-street-12\Binaries\fifastreet.exe"="GpuPreference=2;"
+"C:\Users\junai\Downloads\fifa-street-12\FifaStreetLauncher.exe"="GpuPreference=2;"
+"C:\src\sim_recomp\dist\Game\fifastreet.exe"="GpuPreference=2;"

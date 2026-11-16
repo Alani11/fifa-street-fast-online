@@ -1,0 +1,12 @@
+engine_data/OnlinePatch/backup/Game/data/loc/locale_ptbr.big filesize 5236880 actual 5236880 hend 0x14f tocend 0x14f n 11
+   data/loc/eng_us-meta.xml 0x180 926
+   data/loc/eng_us.db 0x540 991900
+   data/loc/fre_fr-meta.xml 0xf2800 926
+   data/loc/fre_fr.db 0xf2bc0 1070772
+   data/loc/ger_de-meta.xml 0x1f8280 926
+   data/loc/ger_de.db 0x1f8640 1061428
+   data/loc/ita_it-meta.xml 0x2fb880 926
+   data/loc/ita_it.db 0x2fbc40 1042596
+   data/loc/spa_es-meta.xml 0x3fa500 926
+   data/loc/spa_es.db 0x3fa8c0 1057684
+   locale.ini 0x4fcc80 7178

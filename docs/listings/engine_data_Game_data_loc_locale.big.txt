@@ -1,0 +1,12 @@
+engine_data/Game/data/loc/locale.big filesize 5264336 actual 5264336 hend 0x157 tocend 0x14f n 11
+   data/loc/eng_us-meta.xml 0x180 926
+   data/loc/eng_us.db 0x540 1019388
+   data/loc/fre_fr-meta.xml 0xf9340 926
+   data/loc/fre_fr.db 0xf9700 1070772
+   data/loc/ger_de-meta.xml 0x1fedc0 926
+   data/loc/ger_de.db 0x1ff180 1061428
+   data/loc/ita_it-meta.xml 0x3023c0 926
+   data/loc/ita_it.db 0x302780 1042596
+   data/loc/spa_es-meta.xml 0x401040 926
+   data/loc/spa_es.db 0x401400 1057684
+   locale.ini 0x5037c0 7178

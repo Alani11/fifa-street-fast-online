@@ -1,0 +1,5 @@
+key_hash64	name	kind
+a0d449c2c3a933b7	BallAngularDrag	slot
+308f68ea158cd8c1	BallLinearDrag	slot
+662f9c0355f0ab74	MagnusDragMultiplier	slot
+1ebec69a4490f5f3	StopRadiusSpeed	slot

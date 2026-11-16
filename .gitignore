@@ -1,0 +1,31 @@
+# ---- NEVER commit: game data and anything derived from the Xbox 360 game code/assets ----
+engine_data/
+unpacked_data/
+binaries/
+generated/
+generated_snapshot/
+dump*/
+*.dec
+*.bin
+*.big
+
+# upstream third-party repo copy (ReStreet); reference it instead, see README.md
+port_code/
+
+# secrets / personal files
+online.json
+settings.json
+**/online.json
+
+# scratch output of the tools
+docs/listings/_*
+GATES.md
+.understand-anything/
+__pycache__/
+*.pyc
+
+*.etl
+tools/*.etl
+hitch.etl
+tools/hitch.etl.*/
+*.pdb

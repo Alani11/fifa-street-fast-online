@@ -1,0 +1,2 @@
+C:/Users/junai/Downloads/fifa-street-12/Game/data5.big filesize 373141536 actual 373141536 hend 0x3f tocend 0x3f n 1
+   audiodata/speechdata/eng_us/eng_us.sbs 0x40 373141472

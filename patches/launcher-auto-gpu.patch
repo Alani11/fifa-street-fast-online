@@ -1,0 +1,44 @@
+--- a/Launcher/FifaStreetLauncher/DxgiAdapters.cs
++++ b/Launcher/FifaStreetLauncher/DxgiAdapters.cs
+@@ -30,6 +30,28 @@
+     private static T Method<T>(IntPtr instance, int slot) where T : Delegate =>
+         Marshal.GetDelegateForFunctionPointer<T>(
+             Marshal.ReadIntPtr(Marshal.ReadIntPtr(instance), slot * IntPtr.Size));
++
++    /// <summary>"Automatic" GPU choice: the hardware adapter with the most dedicated video memory (the discrete GPU on a
++    /// laptop). Without this the engine takes the first adapter, which is the integrated GPU on hybrid-graphics PCs.
++    /// Returns -1 (let the engine decide) when there is zero or one hardware adapter or the query fails.</summary>
++    internal static int PreferredHardwareAdapter()
++    {
++        try
++        {
++            var all = Enumerate();
++            if (all.Count < 2)
++                return -1;
++            Adapter best = all[0];
++            foreach (var adapter in all)
++                if (adapter.DedicatedMemory > best.DedicatedMemory)
++                    best = adapter;
++            return checked((int)best.Index);
++        }
++        catch (Exception)
++        {
++            return -1;
++        }
++    }
+ 
+     internal static List<Adapter> Enumerate()
+     {
+--- a/Launcher/FifaStreetLauncher/LauncherForm.cs
++++ b/Launcher/FifaStreetLauncher/LauncherForm.cs
+@@ -1233,6 +1233,10 @@
+ 
+             int adapter = gpuBox.SelectedIndex >= 0
+                 ? gpuAdapterIndices[gpuBox.SelectedIndex] : -1;
++            // "Automatic" used to leave the choice to the engine, which takes the first adapter: the integrated GPU on
++            // hybrid-graphics laptops (about 27 FPS in a match where the discrete GPU is smooth). Prefer the GPU with the most memory.
++            if (adapter == -1 && graphicsApi == "D3D12")
++                adapter = DxgiAdapters.PreferredHardwareAdapter();
+ 
+             string postEffect = postEffectBox.SelectedIndex switch
+             {

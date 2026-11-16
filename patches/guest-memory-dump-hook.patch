@@ -1,0 +1,113 @@
+--- port_code/Installer/recomp-template/src/fifastreet_app.h	2026-11-06 22:37:46.748387800 +0300
++++ /c/src/sim_recomp/Installer/recomp-template/src/fifastreet_app.h	2026-11-16 16:13:39.900206800 +0300
+@@ -3,11 +3,20 @@
+ // Customize your app by overriding virtual hooks from rex::ReXApp.
+ 
+ #pragma once
++#ifndef NOMINMAX
++#define NOMINMAX
++#endif
++#include <windows.h>
+ 
+ #include <rex/rex_app.h>
+ #include <rex/cvar.h>
+ #include <rex/filesystem.h>
+ #include <rex/ui/window.h>
++#include <rex/system/xmemory.h>
++#include <chrono>
++#include <cstdlib>
++#include <fstream>
++#include <thread>
+ 
+ class FifastreetApp : public rex::ReXApp {
+  public:
+@@ -44,6 +53,81 @@
+     window()->SetTitle("FIFA Street PC");
+   }
+ 
++  // Research aid (inert unless FIFASTREET_DUMP_DIR is set): writes committed guest memory to disk
++  // so strings, vtables and float tables can be matched with the recompiled sub_XXXXXXXX functions.
++  // File format: repeated records of { u32 BE-agnostic host-order base, u32 size, raw guest bytes }.
++  void OnPostLoadXexImage() override {
++    const char* dir = std::getenv("FIFASTREET_DUMP_DIR");
++    if (!dir) return;
++    std::filesystem::path out(dir);
++    std::error_code ec;
++    std::filesystem::create_directories(out, ec);
++    int first = 0, second = 0;
++    if (const char* v = std::getenv("FIFASTREET_DUMP_SECONDS")) first = std::atoi(v);
++    if (const char* v = std::getenv("FIFASTREET_DUMP_SECONDS2")) second = std::atoi(v);
++    auto* mem = runtime()->memory();
++    // Flag-file trigger: create <dir>/dump_now.flag while a match is running; each flag writes
++    // flag<N>_modules.bin and flag<N>_heap.bin and removes the flag. The timed passes still run
++    // when FIFASTREET_DUMP_SECONDS is set to a positive value.
++    std::thread([mem, out, first, second]() {
++      int n = 0;
++      auto t0 = std::chrono::steady_clock::now();
++      bool timed_done = (first <= 0);
++      while (true) {
++        std::this_thread::sleep_for(std::chrono::milliseconds(500));
++        std::error_code ec2;
++        if (std::filesystem::exists(out / "dump_now.flag", ec2)) {
++          std::filesystem::remove(out / "dump_now.flag", ec2);
++          DumpGuestRange(mem, out / ("flag" + std::to_string(n) + "_heap.bin"), 0x40000000u, 0x80000000u);
++          DumpGuestRange(mem, out / ("flag" + std::to_string(n) + "_modules.bin"), 0x82000000u, 0x90000000u);
++          ++n;
++        }
++        if (!timed_done && std::chrono::steady_clock::now() - t0 > std::chrono::seconds(first)) {
++          timed_done = true;
++          DumpGuestRange(mem, out / "pass0_modules.bin", 0x82000000u, 0x90000000u);
++        }
++      }
++    }).detach();
++  }
++
++  static void DumpGuestRange(rex::memory::Memory* mem, const std::filesystem::path& file,
++                             uint32_t start, uint32_t end) {
++    // Ask Windows which host pages are committed and readable (guest-committed pages can still be
++    // host no-access or guard pages, and reading those kills the process). Merge nothing: one
++    // record per readable host region.
++    std::ofstream f(file, std::ios::binary);
++    uint64_t addr = start;
++    while (addr < end) {
++      const uint8_t* host = mem->TranslateVirtual(static_cast<uint32_t>(addr));
++      MEMORY_BASIC_INFORMATION mbi{};
++      if (!VirtualQuery(host, &mbi, sizeof(mbi))) {
++        addr += 0x1000;
++        continue;
++      }
++      uint64_t region_end = reinterpret_cast<uintptr_t>(mbi.BaseAddress) + mbi.RegionSize;
++      uint64_t n = region_end - reinterpret_cast<uintptr_t>(host);
++      if (n == 0) n = 0x1000;
++      if (addr + n > end) n = end - addr;
++      const DWORD readable = PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READ |
++                             PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY;
++      bool ok = mbi.State == MEM_COMMIT && (mbi.Protect & readable) && !(mbi.Protect & (PAGE_GUARD | PAGE_NOACCESS));
++      if (ok) {
++        uint64_t left = n;
++        uint64_t cur = addr;
++        while (left) {
++          uint32_t chunk = static_cast<uint32_t>(left > 0x4000000u ? 0x4000000u : left);
++          uint32_t base = static_cast<uint32_t>(cur);
++          f.write(reinterpret_cast<const char*>(&base), 4);
++          f.write(reinterpret_cast<const char*>(&chunk), 4);
++          f.write(reinterpret_cast<const char*>(mem->TranslateVirtual(base)), chunk);
++          cur += chunk;
++          left -= chunk;
++        }
++      }
++      addr += n;
++    }
++  }
++
+   void OnPostSetup() override {
+     // FIFA Street uses texture fetch descriptors with the invalid-texture tag.
+     // Their address and format fields are still valid and must be decoded.
+@@ -54,7 +138,6 @@
+   // void OnPostInitLogging() override {}
+   // void OnPreSetup(rex::RuntimeConfig& config) override {}
+   // void OnLoadXexImage(std::string& xex_image) override {}
+-  // void OnPostLoadXexImage() override {}
+   // void OnPostSetup() override {}
+   // void OnCreateDialogs(rex::ui::ImGuiDrawer* drawer) override {}
+   // std::unique_ptr<rex::ui::ImGuiDialog> CreateAchievementsOverlay() override;

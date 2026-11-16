@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="FIFA Street ReStreet research and fast launcher">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#14213d"/></linearGradient>
+    <linearGradient id="hot" x1="0" x2="1"><stop offset="0" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff3b30"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffd23f" stop-opacity=".55"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="360" fill="url(#bg)"/>
+  <g stroke="#1f3a5f" stroke-width="2" fill="none" opacity=".6">
+    <rect x="620" y="70" width="520" height="230" rx="6"/><line x1="880" y1="70" x2="880" y2="300"/><circle cx="880" cy="185" r="46"/>
+    <rect x="620" y="130" width="70" height="110"/><rect x="1070" y="130" width="70" height="110"/>
+  </g>
+  <ellipse cx="880" cy="290" rx="60" ry="9" fill="#000" opacity=".35">
+    <animate attributeName="rx" values="60;34;60" dur="1.4s" repeatCount="indefinite"/>
+  </ellipse>
+  <circle r="46" fill="url(#glow)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M660,250 C760,60 1000,60 1100,250 C1000,60 760,60 660,250"/></circle>
+  <circle r="14" fill="#fff" stroke="#111" stroke-width="3">
+    <animateMotion dur="2.8s" repeatCount="indefinite" path="M660,250 C760,60 1000,60 1100,250 C1000,60 760,60 660,250"/>
+    <animateTransform attributeName="transform" type="rotate" values="0;360" dur="1s" repeatCount="indefinite" additive="sum"/>
+  </circle>
+  <text x="60" y="140" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="64" fill="#fff" letter-spacing="2">FIFA STREET</text>
+  <text x="60" y="210" font-family="Segoe UI, Arial, sans-serif" font-weight="800" font-size="64" fill="url(#hot)" letter-spacing="2">FAST &amp; ONLINE</text>
+  <text x="60" y="256" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#9db4d6">Reverse-engineered specs · tuned launcher · online-ready setup</text>
+  <rect x="60" y="280" width="0" height="6" rx="3" fill="url(#hot)"><animate attributeName="width" values="0;420;420" keyTimes="0;.6;1" dur="3s" repeatCount="indefinite"/></rect>
+</svg>

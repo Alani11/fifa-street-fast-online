@@ -1,0 +1,31 @@
+FILE: engine_data\Game\data0.big | SIZE: 7165026 bytes
+  MAGIC: BIG4bTm.......3.
+  HEX32: 42 49 47 34 62 54 6d 00 00 00 01 0b 00 00 33 c0 00 00 33 c0 00 00 19 c6 61 63 63 6f 6d 70 6c 69
+
+FILE: engine_data\Game\data4.big | SIZE: 6926959 bytes
+  MAGIC: BIG4o.i........E
+  HEX32: 42 49 47 34 6f b2 69 00 00 00 00 01 00 00 00 45 00 00 00 80 00 69 b1 ef 61 75 64 69 6f 64 61 74
+
+FILE: engine_data\OnlinePatch\backup\Game\data\loc\locale_ptbr.big | SIZE: 5236880 bytes
+  MAGIC: BIG4..O........O
+  HEX32: 42 49 47 34 90 e8 4f 00 00 00 00 0b 00 00 01 4f 00 00 01 80 00 00 03 9e 64 61 74 61 2f 6c 6f 63
+
+FILE: engine_data\Game\data\loc\locale.big | SIZE: 5264336 bytes
+  MAGIC: BIG4.SP........W
+  HEX32: 42 49 47 34 d0 53 50 00 00 00 00 0b 00 00 01 57 00 00 01 80 00 00 03 9e 64 61 74 61 2f 6c 6f 63
+
+FILE: engine_data\Game\data\loc\locale_ptbr.big | SIZE: 5236880 bytes
+  MAGIC: BIG4..O........O
+  HEX32: 42 49 47 34 90 e8 4f 00 00 00 00 0b 00 00 01 4f 00 00 01 80 00 00 03 9e 64 61 74 61 2f 6c 6f 63
+
+FILE: engine_data\Game\data\ui\imgAssets\heads\2dheads.big | SIZE: 11214872 bytes
+  MAGIC: BIG4. ..........
+  HEX32: 42 49 47 34 18 20 ab 00 00 00 05 e9 00 01 02 d1 00 01 03 00 00 00 05 d1 64 61 74 61 2f 75 69 2f
+
+FILE: engine_data\Game\data\ui\imgAssets\crest\crest_medium\crest.big | SIZE: 42759596 bytes
+  MAGIC: BIG4.u.........*
+  HEX32: 42 49 47 34 ac 75 8c 02 00 00 16 de 00 05 94 2a 00 05 94 40 00 00 17 30 64 61 74 61 2f 75 69 2f
+
+FILE: engine_data\Game\data\ui\imgAssets\crest\crest_small\crest.big | SIZE: 12459043 bytes
+  MAGIC: BIG4#.........~.
+  HEX32: 42 49 47 34 23 1c be 00 00 00 16 e1 00 05 7e 06 00 05 7e 40 00 00 06 d7 64 61 74 61 2f 75 69 2f

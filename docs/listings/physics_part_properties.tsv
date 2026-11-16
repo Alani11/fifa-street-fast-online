@@ -1,0 +1,15 @@
+name	Mass	Density	MaxLinearVelocity	MaxAngularVelocity	Restitution	StaticFriction	DynamicFriction	LinearDragRate	AngularDragRate	InertiaTensorScale
+part_LeftUpLeg	7.6	1	1e+32	100	0	0.25	0.25	0	0	1
+part_RightFoot	0.6	1	1e+32	100	0	0	0	0	0	1
+part_LeftArm	2.8	1	1e+32	100	0	0	0	0	0	1
+part_RightLeg	3.5	1	1e+32	100	0	0.4	0.4	0	0	1
+part_LeftForeArm	2	1	1e+32	100	0	0	0	0	0	1
+part_RightUpLeg	7.6	1	1e+32	100	0	0.25	0.25	0	0	1
+part_AITrajectory	1	1	1e+32	100	0	0.6	0.6	0	0	1
+part_Head	7	1	1e+32	100	0	0.6	0.6	0	0	1
+part_LeftLeg	3.5	1	1e+32	100	0	0.4	0.4	0	0	1
+part_Hips	22	1	1e+32	100	0	0.6	0.6	0	0	1
+part_RightArm	2.8	1	1e+32	100	0	0	0	0	0	1
+part_RightForeArm	2	1	1e+32	100	0	0	0	0	0	1
+part_LeftFoot	0.6	1	1e+32	100	0	0	0	0	0	1
+part_Spine3	22	1	1e+32	100	0	0.6	0.6	0	0	1
